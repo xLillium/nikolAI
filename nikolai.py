@@ -1,28 +1,6 @@
 import openai
 import streamlit as st
 import qdrant_client
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.vectorstores import Qdrant
-from langchain.chains import RetrievalQA
-from langchain.llms import OpenAI
-
-
-def get_vector_store():
-
-    client = qdrant_client.QdrantClient(
-        st.secrets["QDRANT_HOST"],
-        api_key=st.secrets["QDRANT_API_KEY"]
-    )
-
-    embeddings = OpenAIEmbeddings()
-
-    vector_store = Qdrant(
-        client=client,
-        collection_name=st.secrets["QDRANT_COLLECTION_NAME"],
-        embeddings=embeddings,
-    )
-
-    return vector_store
 
 
 def create_answer_with_context(query):
@@ -61,15 +39,6 @@ def create_answer_with_context(query):
 st.title("nikolAI 🤖")
 
 openai.api_key = st.secrets["OPENAI_API_KEY"]
-
-# create vector store
-vector_store = get_vector_store()
-
-qa = RetrievalQA.from_chain_type(
-    llm=OpenAI(),
-    chain_type="stuff",
-    retriever=vector_store.as_retriever()
-)
 
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo"

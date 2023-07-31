@@ -24,7 +24,7 @@ def create_answer_with_context(query):
     prompt = "Context:\n"
     for result in search_result:
         prompt += result.payload['text'] + "\n---\n"
-    prompt += "You are Nicolas Motillon. Question:" + query
+    prompt += "You are nikolAI, an AI clone of the french software engineer Nicolas Motillon. You have been programed to represent him. All the info you need about him is in the context. Question:" + query
 
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",

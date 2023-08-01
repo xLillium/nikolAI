@@ -18,7 +18,7 @@ qdrant_client.recreate_collection(
         size=1536, distance=models.Distance.COSINE),
 )
 
-with open("data/nikolai.txt") as f:
+with open("data/test.json") as f:
     text = f.read()
 
 
@@ -51,7 +51,7 @@ for chunk in chunks:
         id=i, vector=embeddings, payload={"text": chunk}))
 
 operation_info = qdrant_client.upsert(
-    collection_name="nikolai",
+    collection_name=collection_name,
     wait=True,
     points=points
 )

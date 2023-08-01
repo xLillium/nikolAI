@@ -18,7 +18,7 @@ def create_answer_with_context(query):
     search_result = client.search(
         collection_name=st.secrets["QDRANT_COLLECTION_NAME"],
         query_vector=embeddings,
-        limit=5
+        limit=2
     )
 
     prompt = "Context:\n"

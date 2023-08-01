@@ -2,4 +2,4 @@ data/nikolai.txt
 .streamlit/
 .venv/
 .vscode/
-data/test.txt
+data/test.json
